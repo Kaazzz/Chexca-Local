@@ -34,10 +34,12 @@ chexca-local/
 
 ## Prerequisites
 
-- **Python 3.8+** - For backend
+- **Python 3.9** - For backend (tested with Python 3.9.13)
 - **Node.js 18+** - For frontend
 - **PyTorch** - Deep learning framework
 - **GPU (Optional)** - For faster inference
+
+> **Note:** This project was developed and tested with Python 3.9.13. While Python 3.10-3.11 should work, we recommend using Python 3.9 for best compatibility.
 
 ## Installation
 
@@ -183,7 +185,7 @@ Returns: Grad-CAM visualization
 
 **Model loading error:**
 - Ensure `CheXCA-Final.pth` is in `backend/models/`
-- Check if the model architecture matches (DenseNet121 by default)
+- Check if the model architecture matches 
 
 **CUDA not available:**
 - The app will automatically fall back to CPU
@@ -216,7 +218,7 @@ This application expects a PyTorch model trained on the NIH ChestX-ray14 dataset
 
 - **Input:** 224x224 RGB images
 - **Output:** 14 sigmoid probabilities (multi-label classification)
-- **Architecture:** DenseNet121 (default, can be modified in `model_inference.py`)
+- **Architecture:** ConvNext (default, can be modified in `model_inference.py`)
 
 If your model uses a different architecture, update the `_load_model()` function in `backend/model_inference.py`.
 
