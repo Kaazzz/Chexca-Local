@@ -1,8 +1,15 @@
 import torch
-import config
+import sys
+from pathlib import Path
 
-print("Loading model file...")
-checkpoint = torch.load(config.MODEL_PATH, map_location='cpu')
+# Allow passing model path as argument
+if len(sys.argv) > 1:
+    model_path = sys.argv[1]
+else:
+    model_path = Path(__file__).parent / "models" / "chexca_new.pth"
+
+print(f"Loading model file: {model_path}")
+checkpoint = torch.load(model_path, map_location='cpu')
 
 print("\n" + "="*60)
 print("MODEL FILE INSPECTION")

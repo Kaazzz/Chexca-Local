@@ -1,5 +1,19 @@
 # Quick Setup Guide - CheXCA
 
+## Prerequisites
+
+**Required Python Version: 3.9**
+
+This project was developed and tested with **Python 3.9.13**.
+
+To check your Python version:
+```bash
+python --version
+# Should show: Python 3.9.x
+```
+
+If you don't have Python 3.9, download it from: https://www.python.org/downloads/
+
 ## First Time Setup (5 minutes)
 
 ### Step 1: Install Backend Dependencies
@@ -94,6 +108,11 @@ Then open: **http://localhost:3000**
 ### "Command not found: npm" (Frontend)
 - Solution: Install Node.js from https://nodejs.org/
 - Recommended version: 18 LTS or higher
+
+### Wrong Python version
+- **Required**: Python 3.9.x
+- Check version: `python --version`
+- If you have multiple versions, use: `python3.9` instead of `python`
 
 ### Model loading takes long
 - Normal on first run (loading 460MB model)

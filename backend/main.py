@@ -12,6 +12,7 @@ from PIL import Image
 import config
 from model_inference import get_model
 from grad_cam import generate_gradcam
+from mock_data import get_mock_analysis_result, get_sample_result
 
 app = FastAPI(
     title="CheXCA API",
@@ -181,6 +182,12 @@ async def analyze(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="File must be an image")
 
     try:
+        # MOCK MODE - Return simulated data for demo
+        if config.MOCK_MODE:
+            print("[MOCK MODE] Returning simulated 14-class analysis")
+            return get_sample_result(0)
+
+        # REAL MODE - Use actual model
         # Save uploaded file
         upload_path = config.UPLOAD_DIR / file.filename
         with upload_path.open("wb") as buffer:

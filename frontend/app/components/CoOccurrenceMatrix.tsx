@@ -10,11 +10,16 @@ interface CoOccurrenceMatrixProps {
 export default function CoOccurrenceMatrix({ coOccurrence, diseaseClasses }: CoOccurrenceMatrixProps) {
   const getColorIntensity = (value: number) => {
     const intensity = Math.min(value, 1)
-    const r = Math.round(102 + (153 * intensity)) // Blue to violet gradient
-    const g = Math.round(126 + (112 * intensity))
-    const b = Math.round(234 + (21 * intensity))
-    const alpha = 0.3 + (intensity * 0.7)
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+
+    // More contrasting violet gradient: Light lavender to deep purple
+    // Low values: Light lavender (#E0D4F7)
+    // High values: Deep violet (#6B21A8)
+
+    const r = Math.round(224 - (117 * intensity)) // 224 -> 107
+    const g = Math.round(212 - (179 * intensity)) // 212 -> 33
+    const b = Math.round(247 - (79 * intensity))  // 247 -> 168
+
+    return `rgb(${r}, ${g}, ${b})`
   }
 
   // Check if we have valid co-occurrence data
@@ -63,10 +68,11 @@ export default function CoOccurrenceMatrix({ coOccurrence, diseaseClasses }: CoO
               {diseaseClasses.map((disease, idx) => (
                 <div
                   key={idx}
-                  className="w-16 text-xs text-gray-600 transform -rotate-45 origin-bottom-left mb-20"
-                  style={{ marginLeft: '32px' }}
+                  className="w-16 h-32 flex items-end justify-center"
                 >
-                  {disease.replace('_', ' ')}
+                  <span className="text-xs text-gray-600 writing-mode-vertical transform rotate-180 whitespace-nowrap">
+                    {disease.replace('_', ' ')}
+                  </span>
                 </div>
               ))}
             </div>
@@ -110,18 +116,27 @@ export default function CoOccurrenceMatrix({ coOccurrence, diseaseClasses }: CoO
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <span className="text-sm text-gray-600">Low</span>
-          <div className="flex gap-1">
-            {[0, 0.2, 0.4, 0.6, 0.8, 1].map((val, idx) => (
-              <div
-                key={idx}
-                className="w-12 h-6 border border-gray-300"
-                style={{ backgroundColor: getColorIntensity(val) }}
-              ></div>
-            ))}
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium text-gray-700">Low Correlation</span>
+            <div className="flex gap-1">
+              {[0, 0.2, 0.4, 0.6, 0.8, 1].map((val, idx) => (
+                <div
+                  key={idx}
+                  className="w-16 h-8 border-2 border-gray-300 rounded shadow-sm"
+                  style={{ backgroundColor: getColorIntensity(val) }}
+                >
+                  <div className="text-[10px] text-center pt-1 font-semibold text-gray-700">
+                    {Math.round(val * 100)}%
+                  </div>
+                </div>
+              ))}
+            </div>
+            <span className="text-sm font-medium text-gray-700">High Correlation</span>
           </div>
-          <span className="text-sm text-gray-600">High</span>
+          <p className="text-xs text-gray-500 max-w-2xl text-center">
+            Darker shades indicate stronger co-occurrence patterns between diseases
+          </p>
         </div>
       </div>
     </div>

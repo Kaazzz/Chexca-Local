@@ -34,3 +34,6 @@ DEVICE = "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu"
 # Server configuration
 HOST = "0.0.0.0"
 PORT = 8000
+
+# Mock mode for demonstration (set to False when real model is ready)
+MOCK_MODE = True  # TODO: Set to False when 14-class model is trained

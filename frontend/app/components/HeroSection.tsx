@@ -39,7 +39,7 @@ export default function HeroSection() {
             14 Disease Classifications
           </div>
           <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-            Grad-CAM Visualization
+            Grad-CAM++ Visualization
           </div>
           <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
             Real-time Analysis

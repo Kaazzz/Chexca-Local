@@ -19,7 +19,7 @@ export default function HeatmapViewer({ originalImage, heatmapOverlay, topDiseas
           <div className="flex items-center gap-3">
             <Eye className="w-6 h-6 text-primary-600" />
             <h3 className="text-2xl font-bold text-gray-800">
-              Visual Explanation (Grad-CAM)
+              Visual Explanation (Grad-CAM++)
             </h3>
           </div>
 
@@ -46,7 +46,7 @@ export default function HeatmapViewer({ originalImage, heatmapOverlay, topDiseas
           />
 
           <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-lg">
-            <p className="text-sm font-medium">Focus Area: {topDisease.replace('_', ' ')}</p>
+            <p className="text-sm font-medium">Focus Area: {(topDisease || 'Unknown').replace('_', ' ')}</p>
           </div>
         </div>
 
@@ -56,10 +56,10 @@ export default function HeatmapViewer({ originalImage, heatmapOverlay, topDiseas
             Understanding the Heatmap
           </h4>
           <p className="text-gray-700 leading-relaxed">
-            The colored overlay (Grad-CAM) highlights the regions of the X-ray that most influenced the AI's diagnosis.
+            The colored overlay (Grad-CAM++) highlights the regions of the X-ray that most influenced the AI's diagnosis.
             <span className="font-semibold text-red-600"> Warmer colors (red/yellow)</span> indicate areas of higher importance,
             while <span className="font-semibold text-blue-600">cooler colors (blue/green)</span> show less significant regions.
-            This helps radiologists understand what the AI is "looking at" when making its predictions.
+            This advanced visualization technique helps radiologists understand what the AI is "looking at" when making its predictions.
           </p>
         </div>
       </div>
