@@ -16,23 +16,13 @@ export interface Prediction {
 
 export interface AnalysisResult {
   predictions: { [key: string]: number };
-  top_predictions?: Prediction[];
-  detected_diseases?: Array<{
-    disease: string;
-    status: string;
-    is_primary: boolean;
-    is_secondary: boolean;
-  }>;
-  primary_disease?: string;
-  secondary_disease?: string;
-  total_detected?: number;
+  top_predictions: Prediction[];
   co_occurrence: number[][];
   disease_classes: string[];
   heatmap_overlay: string;
   original_image: string;
-  top_disease?: string;
-  top_disease_probability?: number;
-  show_probabilities?: boolean;
+  top_disease: string;
+  top_disease_probability: number;
 }
 
 export const analyzeImage = async (file: File): Promise<AnalysisResult> => {

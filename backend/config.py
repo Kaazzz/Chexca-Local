@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "models" / "CheXCA-Final.pth"
+MODEL_PATH = BASE_DIR / "models" / "chexca_state_dict.pth"  # Extracted state dict
 UPLOAD_DIR = BASE_DIR / "uploads"
 
 # Create upload directory if it doesn't exist
@@ -35,5 +35,5 @@ DEVICE = "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu"
 HOST = "0.0.0.0"
 PORT = 8000
 
-# Mock mode for demonstration (set to False when real model is ready)
-MOCK_MODE = True  # TODO: Set to False when 14-class model is trained
+# Mock mode DISABLED - using real trained model
+MOCK_MODE = False

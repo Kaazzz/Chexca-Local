@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from contextlib import asynccontextmanager
 import uvicorn
 import shutil
 from pathlib import Path
@@ -14,10 +15,23 @@ from model_inference import get_model
 from grad_cam import generate_gradcam
 from mock_data import get_mock_analysis_result, get_sample_result
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan event handler for startup/shutdown"""
+    # Startup
+    print("Loading model...")
+    get_model()
+    print("Model loaded successfully!")
+    yield
+    # Shutdown (if needed)
+
+
 app = FastAPI(
     title="CheXCA API",
     description="Chest X-ray AI Diagnosis with Explainable AI",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS middleware for local development
@@ -28,14 +42,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Load model on startup"""
-    print("Loading model...")
-    get_model()
-    print("Model loaded successfully!")
 
 
 @app.get("/")
