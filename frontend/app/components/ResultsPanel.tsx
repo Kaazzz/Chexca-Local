@@ -3,13 +3,17 @@
 import { AnalysisResult } from '../lib/api'
 import { formatPercentage, getConfidenceColor, getConfidenceBgColor } from '../lib/utils'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
-import { AlertTriangle, CheckCircle, TrendingUp } from 'lucide-react'
+import { AlertTriangle, CheckCircle, TrendingUp, Download, FileText } from 'lucide-react'
+import { generatePDF } from '../lib/pdfExport'
+import { useState } from 'react'
 
 interface ResultsPanelProps {
   result: AnalysisResult
 }
 
 export default function ResultsPanel({ result }: ResultsPanelProps) {
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+
   // Get top 5 predictions from the model
   const topPredictions = result.top_predictions || []
   
@@ -31,11 +35,23 @@ export default function ResultsPanel({ result }: ResultsPanelProps) {
     }))
     .sort((a, b) => b.probability - a.probability)
 
-  const topDisease = result.top_disease.replace('_', ' ')
-  const topProbability = result.top_disease_probability * 100
+  const topDisease = (result.top_disease || 'Unknown').replace('_', ' ')
+  const topProbability = Number(result.top_disease_probability || 0) * 100
+
+  const handleDownloadPDF = async () => {
+    setIsGeneratingPDF(true)
+    try {
+      await generatePDF(result)
+    } catch (error) {
+      console.error('Error generating PDF:', error)
+      alert('Failed to generate PDF. Please try again.')
+    } finally {
+      setIsGeneratingPDF(false)
+    }
+  }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 py-12 space-y-8" id="results-section">
       {/* Primary Finding Card */}
       <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-2xl p-8 text-white">
         <div className="flex items-center gap-3 mb-4">
@@ -134,6 +150,49 @@ export default function ResultsPanel({ result }: ResultsPanelProps) {
               </div>
             )
           })}
+        </div>
+      </div>
+
+      {/* Download PDF Button */}
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Download Full Report</h3>
+            <p className="text-gray-600">
+              Get a comprehensive PDF summary of this analysis including all predictions, charts, and visual explanations.
+            </p>
+          </div>
+          
+          <button
+            onClick={handleDownloadPDF}
+            disabled={isGeneratingPDF}
+            className={`
+              flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white
+              transition-all duration-200 shadow-lg
+              ${isGeneratingPDF 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl hover:scale-105'
+              }
+            `}
+          >
+            {isGeneratingPDF ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Generating PDF...</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-5 h-5" />
+                <span>Download PDF Report</span>
+                <FileText className="w-5 h-5" />
+              </>
+            )}
+          </button>
+
+          <p className="text-xs text-gray-500 text-center max-w-md">
+            The report includes: Primary diagnosis, all disease probabilities, top predictions chart, 
+            Grad-CAM heatmap visualization, and co-occurrence analysis.
+          </p>
         </div>
       </div>
     </div>
