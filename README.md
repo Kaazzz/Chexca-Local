@@ -1,20 +1,20 @@
 # CheXCA - Chest X-ray AI Diagnosis
 
-🏥 **Advanced chest X-ray diagnosis system powered by deep learning with explainable AI**
+**Advanced chest X-ray diagnosis system powered by deep learning with explainable AI**
 
 CheXCA (Chest X-ray Classification & Analysis) is a production-ready medical AI application that provides intelligent chest X-ray analysis with visual explanations, disease co-occurrence patterns, and comprehensive diagnostic insights. Built with True_CHEXCA architecture (ConvNeXt-Base + CTCA + GAT Fusion) and designed for local deployment.
 
-## ✨ Features
+## Features
 
-- **🔬 14 Disease Classifications** - Complete NIH ChestX-ray14 dataset pathologies with multi-label classification
-- **🧠 Explainable AI** - Grad-CAM++ heatmap visualizations showing model attention regions
-- **📊 Interactive Dashboard** - Real-time analysis with professional data visualizations
-- **🔗 Co-occurrence Analysis** - Disease correlation matrix with visual intensity mapping
-- **📄 PDF Export** - Comprehensive reports with all analysis results, charts, and visualizations
-- **🔒 Local Deployment** - Complete privacy - all processing happens on your machine
-- **⚡ Production Ready** - FastAPI backend + Next.js frontend with TypeScript
+- **14 Disease Classifications** - Complete NIH ChestX-ray14 dataset pathologies with multi-label classification
+- **Explainable AI** - Grad-CAM++ heatmap visualizations showing model attention regions
+- **Interactive Dashboard** - Real-time analysis with professional data visualizations
+- **Co-occurrence Analysis** - Disease correlation matrix with visual intensity mapping
+- **PDF Export** - Comprehensive reports with all analysis results, charts, and visualizations
+- **Local Deployment** - Complete privacy - all processing happens on your machine
+- **Production Ready** - FastAPI backend + Next.js frontend with TypeScript
 
-## 🏗️ Architecture
+## Architecture
 
 ### System Overview
 ```
@@ -75,14 +75,14 @@ chexca-local/
 - Mixed Precision: Automatic Mixed Precision (AMP) for faster training
 - Preprocessing: ImageNet normalization (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Python 3.9.13** - Backend runtime (critical for PyTorch compatibility)
 - **Node.js 18+** - Frontend build system
 - **8GB RAM minimum** - For model inference (16GB recommended)
 - **GPU (Optional)** - CUDA-compatible GPU for faster inference (2-5x speedup)
 
-> **⚠️ Important:** This project requires Python 3.9.13. While Python 3.10-3.11 may work, we strongly recommend Python 3.9 for optimal compatibility with PyTorch 2.8.0 and all dependencies.
+> **Important:** This project requires Python 3.9.13. While Python 3.10-3.11 may work, we strongly recommend Python 3.9 for optimal compatibility with PyTorch 2.8.0 and all dependencies.
 
 ### System Requirements
 
@@ -93,7 +93,7 @@ chexca-local/
 | Storage | 2 GB | 5 GB |
 | OS | Windows 10, macOS 11, Ubuntu 20.04 | Windows 11, macOS 13, Ubuntu 22.04 |
 
-## 🚀 Installation
+## Installation
 
 ### Backend Setup
 
@@ -162,7 +162,7 @@ npm install
 
 ### Model Files Setup
 
-**⚠️ CRITICAL STEP: Model files are NOT included in this repository.**
+**CRITICAL STEP: Model files are NOT included in this repository.**
 
 The trained model files (433 MB) are distributed separately due to GitHub file size limitations.
 
@@ -183,7 +183,7 @@ The trained model files (433 MB) are distributed separately due to GitHub file s
 
 **See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed model installation instructions.**
 
-## ▶️ Running the Application
+## Running the Application
 
 ### Option 1: Quick Start Script (Windows - Recommended)
 
@@ -201,14 +201,14 @@ cd backend
 # source .venv/bin/activate  # On macOS/Linux
 python main.py
 ```
-✅ Backend running at `http://localhost:8000`
+Backend running at `http://localhost:8000`
 
 **Terminal 2 - Start Frontend:**
 ```bash
 cd frontend
 npm run dev
 ```
-✅ Frontend running at `http://localhost:3000`
+Frontend running at `http://localhost:3000`
 
 ### Verifying Startup
 
@@ -227,7 +227,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000
 ○ Local:   http://localhost:3000
 ```
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Step-by-Step Analysis
 
@@ -283,7 +283,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000
      - Timestamp and disclaimer
    - Professional format suitable for presentations or documentation
 
-## 🏥 Disease Classes (NIH ChestX-ray14)
+## Disease Classes (NIH ChestX-ray14)
 
 The model is trained to detect 14 thoracic pathologies from the NIH ChestX-ray14 dataset:
 
@@ -306,7 +306,7 @@ The model is trained to detect 14 thoracic pathologies from the NIH ChestX-ray14
 
 **Multi-Label Classification:** The model can detect multiple diseases simultaneously (e.g., a patient may have both Pneumonia and Infiltration).
 
-## 🔌 API Documentation
+## API Documentation
 
 ### Base URL
 ```
@@ -405,7 +405,7 @@ FastAPI automatically generates interactive API documentation:
 - **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend Technologies
 - **FastAPI 0.104+** - Modern Python web framework with async support
@@ -435,7 +435,7 @@ FastAPI automatically generates interactive API documentation:
 - **PostCSS** - CSS transformations
 - **Python virtual environments** - Dependency isolation
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Backend Issues
 
@@ -542,7 +542,7 @@ FastAPI automatically generates interactive API documentation:
 - Known PyTorch/multiprocessing warning on Windows
 - Does not affect functionality
 
-## 📊 Model Performance & Specifications
+## Model Performance & Specifications
 
 ### Model Details
 - **Architecture:** True_CHEXCA (ConvNeXt-Base + CTCA + GAT Fusion)
@@ -571,7 +571,7 @@ FastAPI automatically generates interactive API documentation:
 - **Labels:** 14 thoracic disease labels (multi-label)
 - **Image Source:** PACS at NIH Clinical Center
 
-## ⚙️ Customization & Extension
+## Customization & Extension
 
 ### Changing Model
 
@@ -663,14 +663,14 @@ app.add_middleware(
 )
 ```
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 ### Data Privacy
-- ✅ **100% Local Processing** - All analysis happens on your machine
-- ✅ **No External API Calls** - No data sent to third parties
-- ✅ **Temporary Storage** - Uploaded images stored in `backend/uploads/` during processing only
-- ✅ **No Persistent Storage** - Images not saved after analysis (unless you manually save them)
-- ✅ **HIPAA Consideration** - Suitable for environments requiring local processing
+- **100% Local Processing** - All analysis happens on your machine
+- **No External API Calls** - No data sent to third parties
+- **Temporary Storage** - Uploaded images stored in `backend/uploads/` during processing only
+- **No Persistent Storage** - Images not saved after analysis (unless you manually save them)
+- **HIPAA Consideration** - Suitable for environments requiring local processing
 
 ### Security Best Practices
 
@@ -696,14 +696,14 @@ Currently implemented protections:
 
 ### Compliance Notes
 
-⚠️ **Important Medical Disclaimer:**
+**Important Medical Disclaimer:**
 - This tool is for **research and educational purposes only**
 - **NOT FDA approved** for clinical diagnosis
 - **NOT a substitute** for professional medical advice
 - Results must be **validated by qualified healthcare professionals**
 - Users are responsible for ensuring compliance with local healthcare regulations (HIPAA, GDPR, etc.)
 
-## 📚 Additional Resources
+## Additional Resources
 
 ### Documentation Files
 - **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Quick start guide with common issues
@@ -736,7 +736,7 @@ If using this project for research, please cite:
 }
 ```
 
-## 🤝 Contributing
+## Contributing
 
 This is a research project. If you'd like to contribute:
 
@@ -745,7 +745,7 @@ This is a research project. If you'd like to contribute:
 3. **Improve documentation** - Submit corrections or clarifications
 4. **Share results** - Discuss your findings with the community
 
-## 📝 License
+## License
 
 This project is provided as-is for educational and research purposes. 
 
@@ -755,7 +755,7 @@ This project is provided as-is for educational and research purposes.
 - Pre-trained Models: Check respective model licenses (ConvNeXt: MIT)
 - No warranty or liability for medical decisions
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **NIH Clinical Center** for the ChestX-ray14 dataset
 - **Facebook AI Research** for ConvNeXt architecture
@@ -764,7 +764,7 @@ This project is provided as-is for educational and research purposes.
 - **FastAPI** (Sebastián Ramírez) for the backend framework
 - **Vercel** for Next.js framework
 
-## 📧 Support & Contact
+## Support & Contact
 
 For technical support:
 1. Check the **[Troubleshooting](#-troubleshooting)** section
@@ -777,8 +777,8 @@ For research collaborations or advanced questions, contact the project maintaine
 
 <div align="center">
 
-**Built for medical AI research and education** 🏥  
-**Powered by Deep Learning** 🧠  
-**Made with ❤️ for the healthcare community**
+**Built for medical AI research and education**  
+**Powered by Deep Learning**  
+**Made with care for the healthcare community**
 
 </div>
